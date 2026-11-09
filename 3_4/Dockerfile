@@ -6,4 +6,4 @@ WORKDIR /workspace
 
 COPY builder.sh .
 
-ENTRYPOINT ["/builder.sh"]
+ENTRYPOINT ["./builder.sh"]
