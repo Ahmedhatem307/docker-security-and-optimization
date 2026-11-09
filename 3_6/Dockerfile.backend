@@ -1,0 +1,17 @@
+FROM golang:1.16
+
+WORKDIR /app
+
+COPY ./3_6/example-backend/go.mod ./3_6/example-backend/go.sum ./
+COPY ./3_6/example-backend/ .
+
+RUN go mod download && go build && go test ./... && useradd -m appuser && chown -R appuser .
+
+EXPOSE 8080
+
+ENV PORT=8080
+ENV REQUEST_ORIGIN=http://localhost:5001
+
+USER appuser
+
+CMD ["./server"]
