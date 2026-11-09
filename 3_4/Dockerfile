@@ -6,6 +6,4 @@ WORKDIR /workspace
 
 COPY builder.sh .
 
-RUN chmod +x /builder.sh
-
 ENTRYPOINT ["/builder.sh"]
