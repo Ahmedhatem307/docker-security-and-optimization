@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./3_7/example-backend/go.mod ./3_7/example-backend/go.sum ./
 COPY ./3_7/example-backend/ .
 
-RUN go mod download && go build && go test ./... && useradd -m appuser && chown -R appuser .
+RUN go mod download && go build && go test ./... && adduser -m appuser && chown -R appuser .
 
 EXPOSE 8080
 
