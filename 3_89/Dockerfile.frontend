@@ -13,7 +13,7 @@ RUN npm install && npm run build
 
 FROM node:16-alpine AS serve
 
-COPY --from=builder /usr/src/app/builder /usr/src/app
+COPY --from=builder /usr/src/app/build ./build
 
 RUN  npm install -g serve && adduser -D appuser && chown -R appuser .
 
