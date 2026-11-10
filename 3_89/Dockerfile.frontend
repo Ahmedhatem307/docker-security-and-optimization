@@ -1,0 +1,22 @@
+FROM node:16-alpine AS builder
+
+EXPOSE 5001
+
+WORKDIR /usr/src/app
+
+COPY ./3_89/example-frontend .
+
+ENV REACT_APP_BACKEND_URL=http://localhost:8080
+
+RUN npm install && npm run build 
+
+
+FROM node:16-alpine AS serve
+
+COPY --from=builder /usr/src/app/builder /usr/src/app
+
+RUN  npm install -g serve && adduser -D appuser && chown -R appuser .
+
+USER appuser
+
+CMD ["serve" ,"-s" ,"-l" ,"5001" ,"build"]
